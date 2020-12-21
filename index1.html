@@ -1,9 +1,36 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <base target="_top">
-  </head>
-  <body>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>採用サイト</title>
+</head>
+<body>
+
+<?var url = getScriptUrl();?>
+
+<div style="height:150px"></div>
     
-  </body>
+<div align="center">
+    <label>　 ID:　</label>
+        <input type="text" name="loginID" required>
+    <br>
+    <label>PASS:　</label>
+    <input type="text" name="loginPASS" required>
+    <br>
+    <br>
+</div>
+    
+<div align="center">
+    
+    <button style="margin-right: 30px;color:white;background-color:#0000FF;font-size:10;
+                   width:150px;height:70px;outline: none;border-radius:10px;border:none;"
+            type="button" onclick="login()">ログイン</button>
+    
+     <button style="color:white;background-color:#FFCC33;font-size:10;vertical-align: top;
+                   width:150px;height:70px;outline: none;border-radius:10px;border:none;"
+            type="button" onclick="window.top.location.href = '<?!=url?>?page=index4.html';"/>新規登録<br>（エントリー）</button>
+    
+</div>
+
+</body>
 </html>
