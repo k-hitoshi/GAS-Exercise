@@ -3,26 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>採用サイト</title>
+    <base target="_top">
 </head>
 <body>
+
+<?var url = getScriptUrl();?>
 
 <div style="height:150px"></div>
     
 <table border="1" style="border-collapse: collapse;margin-left: 970px;margin-bottom: 30px">
     <tr>
-      <th width="150" height="40">永和太郎</th>
+      <th width="150" height="40" style="font-weight: normal">永和太郎</th>
     </tr>
 </table>
 <table border="1" valign="middle" style="margin: auto; border-collapse: collapse" width="900" height="300">
 
     <tr>
-      <th width="200">日時</th>
-      <th width="400">内容</th>
-      <th width="300">申込状況</th>
+      <th width="200" style="font-weight: normal">日時</th>
+      <th width="400" style="font-weight: normal">内容</th>
+      <th width="300" style="font-weight: normal">申込状況</th>
     </tr>
     <tr>
       <td>2020年8月6日</td>
-      <td>インターンシップ プログラミング試験</td>
+      <td><a href = '<?!=url?>?page=index3'>インターンシップ　プログラミング体験</a></td>
       <td>
           <div>
             <button style="margin-right: 15px;margin-left: 15px;color:white;background-color:#FF9966;font-size:10;
@@ -36,7 +39,7 @@
     </tr>
     <tr>
       <td>2020年10月31日</td>
-      <td>会社説明会</td>
+      <td><a href = '<?!=url?>?page=index5'>会社説明会</a></td>
       <td>
           <div>
             <button style="margin-right: 15px;margin-left: 15px;color:white;background-color:#FF9966;font-size:10;
@@ -50,7 +53,7 @@
     </tr>
     <tr>
       <td>2021年4月2日</td>
-      <td>筆記試験</td>
+      <td><a href = '<?!=url?>?page=index6'>筆記試験</a></td>
       <td>
           <div>
             <button style="margin-right: 15px;margin-left: 15px;color:white;background-color:#FF9966;font-size:10;
@@ -65,12 +68,13 @@
 
 </table>
     
-<div style="padding-left: 15px;padding-top: 50px">
+<div style="padding-left: 200px;padding-top: 40px">
     
     <button style="color:black;background-color:white;font-size:10;
                    width:120px;height:50px;outline: none;border-radius:10px;"
-            type="button" onclick="signup()">戻る</button>
+            type="button" onclick="window.top.location.href = '<?!=url?>?page=index1.html';">戻る</button>
 </div>
     
 </body>
 </html>
+

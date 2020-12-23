@@ -6,36 +6,38 @@
 </head>
 <body>
 
+<?var url = getScriptUrl();?>
+
 <div style="height:150px"></div>
     
 <div align="left">
     <label style="margin-left: 42px;margin-right: 24px">ID:</label>
-        <input type="text" name="loginID" required>
+        <input type="text" name="loginID" id="loginID" required>
     <br>
     
     <div style="margin-top: 5px;"></div>
-    <label style="margin-left: 27px;margin-right: 23px">PASS:</label>
-    <input type="text" name="loginPASS" required>
+    <label style="margin-left: 20px;margin-right: 25px">PASS:</label>
+    <input type="password" maxlength="8" name="loginPASS" id="loginPASS" required>
     <br>
     
     <div style="margin-top: 5px;"></div>
     <label style="margin-left: 28px;margin-right: 25px">氏名:</label>
-    <input size="100" type="text" name="loginPASS" required>
+    <input size="100" type="text" name="name" id="name" required>
     <br>
     
     <div style="margin-top: 5px;"></div>
     <label style="margin-left: 28px;margin-right: 25px">住所:</label>
-    <input size="100" type="text" name="loginPASS" required>
+    <input size="100" type="text" name="address" id="address" required>
     <br>
     
     <div style="margin-top: 5px;"></div>
     <label style="margin-left: 28px;margin-right: 25px">電話:</label>
-    <input size="100" type="text" name="loginPASS" required>
+    <input size="100" type="text" name="phoneNumber" id="phoneNumber" required>
     <br>
     
     <div style="margin-top: 5px;"></div>
     <label style="margin-left: 28px;margin-right: 25px">学校:</label>
-    <input size="100" type="text" name="loginPASS" required>
+    <input size="100" type="text" name="school" id="school" required>
     <br>
     <br>
 </div>
@@ -43,13 +45,41 @@
 <div align="left" style="margin-top: 5px;margin-left: 20px">
     <button style="color:white;background-color:#999999;font-size:10;
                    width:120px;height:50px;outline:none;border-radius:10px;border:none;"
-            type="button" onclick="newsignup()">登　録</button>
+           type="button" onclick="newSignUp()">登　録</button>
 </div>
+
 <div align="left" style="margin-top: 5px;margin-left: 20px">
     <button style="color:black;background-color:white;font-size:10;
                    width:60px;height:40px;outline:none;border-radius:10px;"
-            type="button" onclick="back()">戻る</button>
+            type="button" onclick="window.top.location.href = '<?!=url?>?page=index1.html';">戻る</button>
 </div>
 
+    <script>
+     function newSignUp(){
+      const isloginID     = document.getElementById("loginID").value;
+      const isloginPASS   = document.getElementById("loginPASS").value;
+      const isname        = document.getElementById("name").value;
+      const isaddress     = document.getElementById("address").value;
+      const isphoneNumber = document.getElementById("phoneNumber").value;
+      const isschool      = document.getElementById("school").value;
+  
+      google.script.run
+      .withFailureHandler(onFailure)
+      .withSuccessHandler(onSuccess)
+      .inputSheet1(isloginID, isloginPASS, isname, isaddress, isphoneNumber, isschool);
+     }
+     
+     function onSuccess(result) {
+      alert(result);
+      window.top.location.href = '<?!=url?>?page=index2.html';
+    }
+    
+    function onFailure(e) {
+      alert([e.message, e.stack]);
+    }
+    
+    </script>
+    
 </body>
 </html>
+
