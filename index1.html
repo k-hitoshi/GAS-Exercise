@@ -28,8 +28,9 @@
     
      <button style="color:white;background-color:#FFCC33;font-size:10;vertical-align: top;
                    width:150px;height:70px;outline: none;border-radius:10px;border:none;"
-            type="button" onclick="window.top.location.href = '<?!=url?>?page=index4.html';">新規登録<br>（エントリー）</button>
+            type="button" onclick="window.top.location.href = '<?!=url?>?uname=&enumber=99&page=index4';">新規登録<br>（エントリー）</button>
 </div>
+
 <script>
     function login() {
         const isloginID     = document.getElementById("loginID").value;
@@ -41,14 +42,23 @@
         .inputCheck(isloginID, isloginPASS);
      }
      
-    function onSuccess(result) {
-        window.top.location.href = '<?!=url?>?page=index2.html';
+    function onSuccess(result, isloginID) {
+    
+    //◆◆対応中
+    
+        console.log(result);
+        console.log(isloginID);
+        const loginIDN = document.getElementById("loginID").value;
+        window.top.location.href = '<?!=url?>?id=isloginID&page=index2';
+        
+    //◆◆対応中
+    
     }
     
     function onFailure(e) {
         alert([e.message, e.stack]);
     }
-</Script>
+</script>
 
 </body>
 </html>
