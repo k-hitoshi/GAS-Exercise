@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>採用サイト</title>
+</head>
+
+<body>
+
+    <?var url = getScriptUrl();?>
+
+    <div style="height:150px"></div>
+    <table border="1" style="border-collapse: collapse;margin-left: 928px;margin-bottom: 30px">
+        <tr>
+            <th width="150" height="40" style="font-weight: normal">
+                <?=id?>
+            </th>
+        </tr>
+    </table>
+
+    <table border="1" valign="middle" style="margin: auto; border-collapse: collapse">
+
+        <?
+ let enumb = enumber;
+ let data  = getData1();
+ let value = []; 
+ for (let i = 0; i < data.length; i++ ) {
+      if ( enumb == data[i][0] ) {
+      value[1] = data[i][1];
+      value[2] = data[i][2];
+      value[3] = data[i][3];      
+      value[4] = data[i][4];
+      }
+ }
+
+ //実施日算出
+ let date1  = value[2];
+ let year1  = date1.getFullYear();
+ let month1 = date1.getMonth() + 1;
+ let day1   = date1.getDate();
+ let dateOpen = year1 + '年' + month1 + '月' + day1 + '日';
+
+ //申込期限算出
+ let date2  = value[4];
+ let year2  = date2.getFullYear();
+ let month2 = date2.getMonth() + 1;
+ let day2   = date2.getDate();
+ let dateRimit = year2 + '年' + month2 + '月' + day2 + '日';
+?>
+
+        <tr>
+            <th width="200" height="70" style="text-align: left;font-weight: normal">イベント名</th>
+            <td width="600" height="70" style="text-align: left">
+                <?=value[1]?>
+            </td>
+        </tr>
+        <tr>
+            <th width="200" height="70" style="text-align: left;font-weight: normal">実施日</th>
+            <td width="600" height="70" style="text-align: left">
+                <?=dateOpen?>
+            </td>
+        </tr>
+        <tr>
+            <th width="200" height="70" style="text-align: left;font-weight: normal">詳細</th>
+            <td width="600" height="70" style="text-align: left">
+                <?=value[3]?>
+            </td>
+        </tr>
+        <tr>
+            <th width="200" height="70" style="text-align: left;font-weight: normal">申込期限</th>
+            <td width="600" height="70" style="text-align: left">
+                <?=dateRimit?>
+            </td>
+        </tr>
+    </table>
+
+    <div style="padding-left: 240px;padding-top: 30px">
+
+        <button style="color:black;background-color:white;font-size:10;
+                   width:120px;height:50px;outline: none;border-radius:10px;" type="button"
+            onclick="window.top.location.href =  '<?!=url?>?id=<?=id?>&enumber=99&page=index2';">戻る</button>
+    </div>
+
+</body>
+
+</html>
+
