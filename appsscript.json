@@ -3,9 +3,10 @@
   "dependencies": {
   },
   "webapp": {
-    "access": "MYSELF",
+    "access": "DOMAIN",
     "executeAs": "USER_DEPLOYING"
   },
   "exceptionLogging": "STACKDRIVER",
   "runtimeVersion": "V8"
 }
+
