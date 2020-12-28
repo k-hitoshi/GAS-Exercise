@@ -75,7 +75,8 @@
 
         function onSuccess(result) {
             alert(result);
-            window.top.location.href = '<?!=url?>?page=index2.html';
+            const signIDN = document.getElementById("signID").value;
+            window.top.location.href = '<?!=url?>' + '?id=' + signIDN + '&enumber=99&page=index2';
         }
 
 
@@ -87,3 +88,4 @@
 </body>
 
 </html>
+
