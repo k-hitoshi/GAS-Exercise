@@ -78,20 +78,79 @@ function getData1() {
 }
 
 
-//◆◆◆◆◆◆◆
-function inputSheet2(event, n, id) {
-    const sheet = SpreadsheetApp.openById(DB_SHEET_ID).getSheetByName(DB_SHEET_NAME2);
+//申込状況一覧、ヘッダー情報取得
+function getdata2() {
+    const sheet = SpreadsheetApp.openById(DB_SHEET_ID).getSheetByName(DB_SHEET_NAME3);
+    let valuesHT = sheet.getRange('B1:D2').getValues();
 
-    //ID無しの場合は配列でpush
-    var row = [];
+    let key = '';
+    for (let i = 0; i < sheet.getLastColumn() - 1; i++) {
+        key = valuesHT[0][i];
+        valuesHT[0][i] = getdate(key);
+    }
+
+    return valuesHT
+
+}
+
+
+function getdate(key) {
+
+    let date = new Date(key);
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    return year + '年' + month + '月' + day + '日';
+
+}
+
+
+//申込状況一覧、データ取得
+function getdata3(id) {
+    const sheet = SpreadsheetApp.openById(DB_SHEET_ID).getSheetByName(DB_SHEET_NAME3);
+
+    let rowD = [];
+    let rowT = [];
 
     //ID列取得
     const idValues = sheet.getRange('A3:A').getValues();
-    const hasID = idValues.some(function (array, i, data1) {
+    const hasID = idValues.some(function (array, i, idValues) {
         return (array[0] === id);
     });
 
-    //id無しはキャンセル無し
+    //id無し
+    if (hasID == false) {
+        rowD.push('', '', '');
+        console.log(rowD);
+        //id有り 
+    } else if (hasID == true) {
+        let key = id;
+        let col = 'A';
+        let row = getRow(key, col, sheet);
+        let rowT = sheet.getRange(row, 2, 1, 3).getValues();
+        rowD[0] = rowT[0][0];
+        rowD[1] = rowT[0][1];
+        rowD[2] = rowT[0][2];
+        console.log(rowD);
+
+        return rowD
+    }
+}
+
+
+function inputSheet2(event, n, id) {
+    const sheet = SpreadsheetApp.openById(DB_SHEET_ID).getSheetByName(DB_SHEET_NAME3);
+
+    //ID無しの場合は配列でpush
+    let row = [];
+
+    //ID列取得
+    const idValues = sheet.getRange('A3:A').getValues();
+    const hasID = idValues.some(function (array, i, idValues) {
+        return (array[0] === id);
+    });
+
+    //id無し（キャンセル無し）
     if (hasID == false) {
         row.push(id);
         if (event === 'exp' && n === 1) {
@@ -106,37 +165,53 @@ function inputSheet2(event, n, id) {
         }
     }
 
-    //id有り exp
+    //id有り
     if (hasID == true) {
         let key = id;
         let col = 'A';
         let row = getRow(key, col, sheet);
+
+        //id有り exp
         if (event === 'exp' && n === 1) {
             sheet.getRange(row, 2).setValue('〇');
-        } else if (event === 'exp' && n === 1) {
+        } else if (event === 'exp' && n === 0) {
             sheet.getRange(row, 2).setValue('');
         }
+
+        //id有り inf
+        if (event === 'inf' && n === 1) {
+            sheet.getRange(row, 3).setValue('〇');
+        } else if (event === 'inf' && n === 0) {
+            sheet.getRange(row, 3).setValue('');
+        }
+
+        //id有り tes
+        if (event === 'tes' && n === 1) {
+            sheet.getRange(row, 4).setValue('〇');
+        } else if (event === 'tes' && n === 0) {
+            sheet.getRange(row, 4).setValue('');
+        }
+
     }
+    return n
 }
 
 
-//inputSheet2　からの呼出
-function get_row(key, col, sheet) {
+//特定行の列を取得
+function getRow(key, col, sheet) {
     let array = get_array(sheet, col);
-    var row = array.indexOf(key) + 1;
+    let row = array.indexOf(key) + 1;
     return row;
 }
 
 
 function get_array(sheet, col) {
-    var last_row = sheet.getLastRow();
-    var range = sheet.getRange(col + "1:" + col + last_row)
-    var values = range.getValues();
-    var array = [];
-    for (var i = 0; i < values.length; i++) {
+    let last_row = sheet.getLastRow();
+    let range = sheet.getRange(col + "1:" + col + last_row)
+    let values = range.getValues();
+    let array = [];
+    for (let i = 0; i < values.length; i++) {
         array.push(values[i][0]);
     }
     return array;
 }
-
-
