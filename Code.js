@@ -83,30 +83,25 @@ function getdata2() {
     const sheet = SpreadsheetApp.openById(DB_SHEET_ID).getSheetByName(DB_SHEET_NAME3);
     let valuesHT = sheet.getRange('B1:D2').getValues();
 
-    let key = valuesHT[0][0];
-    let dateOpen = getdate(key);
-    valuesHT[0][0] = dateOpen;
+    let key = '';
+    for (let i = 0; i < sheet.getLastColumn() - 1; i++) {
+        key = valuesHT[0][i];
+        valuesHT[0][i] = getdate(key);
+    }
 
-    key = valuesHT[0][1];
-    dateOpen = getdate(key);
-    valuesHT[0][1] = dateOpen;
-
-    key = valuesHT[0][2];
-    dateOpen = getdate(key);
-    valuesHT[0][2] = dateOpen;
-
-    console.log(valuesHT);
     return valuesHT
+
 }
 
 
 function getdate(key) {
-    let year = key.getFullYear();
-    let month = key.getMonth() + 1;
-    let day = key.getDate();
-    let dateOpen = year + '年' + month + '月' + day + '日';
 
-    return dateOpen
+    let date = new Date(key);
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    return year + '年' + month + '月' + day + '日';
+
 }
 
 
@@ -114,8 +109,8 @@ function getdate(key) {
 function getdata3(id) {
     const sheet = SpreadsheetApp.openById(DB_SHEET_ID).getSheetByName(DB_SHEET_NAME3);
 
-    var rowD = [];
-    var rowT = [];
+    let rowD = [];
+    let rowT = [];
 
     //ID列取得
     const idValues = sheet.getRange('A3:A').getValues();
@@ -147,7 +142,7 @@ function inputSheet2(event, n, id) {
     const sheet = SpreadsheetApp.openById(DB_SHEET_ID).getSheetByName(DB_SHEET_NAME3);
 
     //ID無しの場合は配列でpush
-    var row = [];
+    let row = [];
 
     //ID列取得
     const idValues = sheet.getRange('A3:A').getValues();
@@ -205,19 +200,18 @@ function inputSheet2(event, n, id) {
 //特定行の列を取得
 function getRow(key, col, sheet) {
     let array = get_array(sheet, col);
-    var row = array.indexOf(key) + 1;
+    let row = array.indexOf(key) + 1;
     return row;
 }
 
 
 function get_array(sheet, col) {
-    var last_row = sheet.getLastRow();
-    var range = sheet.getRange(col + "1:" + col + last_row)
-    var values = range.getValues();
-    var array = [];
-    for (var i = 0; i < values.length; i++) {
+    let last_row = sheet.getLastRow();
+    let range = sheet.getRange(col + "1:" + col + last_row)
+    let values = range.getValues();
+    let array = [];
+    for (let i = 0; i < values.length; i++) {
         array.push(values[i][0]);
     }
     return array;
 }
-

@@ -1,91 +1,88 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <title>採用サイト</title>
 </head>
-
 <body>
 
-    <?var url = getScriptUrl();?>
+<?var url = getScriptUrl();?>
 
-    <div style="height:150px"></div>
-
-    <div align="left">
-        <label style="margin-left: 42px;margin-right: 24px">ID:</label>
+<div style="height:150px"></div>
+    
+<div align="left">
+    <label style="margin-left: 42px;margin-right: 24px">ID:</label>
         <input type="text" name="signID" id="signID" required>
-        <br>
+    <br>
+    
+    <div style="margin-top: 5px;"></div>
+    <label style="margin-left: 20px;margin-right: 25px">PASS:</label>
+    <input type="password" maxlength="8" name="signPASS" id="signPASS" required>
+    <br>
+    
+    <div style="margin-top: 5px;"></div>
+    <label style="margin-left: 28px;margin-right: 25px">氏名:</label>
+    <input size="100" type="text" name="signName" id="signName" required>
+    <br>
+    
+    <div style="margin-top: 5px;"></div>
+    <label style="margin-left: 28px;margin-right: 25px">住所:</label>
+    <input size="100" type="text" name="signAddress" id="signAddress" required>
+    <br>
+    
+    <div style="margin-top: 5px;"></div>
+    <label style="margin-left: 28px;margin-right: 25px">電話:</label>
+    <input size="100" type="text" name="signPhoneNumber" id="signPhoneNumber" required>
+    <br>
+    
+    <div style="margin-top: 5px;"></div>
+    <label style="margin-left: 28px;margin-right: 25px">学校:</label>
+    <input size="100" type="text" name="signSchool" id="signSchool" required>
+    <br>
+    <br>
+</div>
+    
+<div align="left" style="margin-top: 5px;margin-left: 20px">
+    <button style="color:white;background-color:#999999;font-size:10;
+                   width:120px;height:50px;outline:none;border-radius:10px;border:none;"
+           type="button" onclick="newSignUp()">登　録</button>
+</div>
 
-        <div style="margin-top: 5px;"></div>
-        <label style="margin-left: 20px;margin-right: 25px">PASS:</label>
-        <input type="password" maxlength="8" name="signPASS" id="signPASS" required>
-        <br>
-
-        <div style="margin-top: 5px;"></div>
-        <label style="margin-left: 28px;margin-right: 25px">氏名:</label>
-        <input size="100" type="text" name="signName" id="signName" required>
-        <br>
-
-        <div style="margin-top: 5px;"></div>
-        <label style="margin-left: 28px;margin-right: 25px">住所:</label>
-        <input size="100" type="text" name="signAddress" id="signAddress" required>
-        <br>
-
-        <div style="margin-top: 5px;"></div>
-        <label style="margin-left: 28px;margin-right: 25px">電話:</label>
-        <input size="100" type="text" name="signPhoneNumber" id="signPhoneNumber" required>
-        <br>
-
-        <div style="margin-top: 5px;"></div>
-        <label style="margin-left: 28px;margin-right: 25px">学校:</label>
-        <input size="100" type="text" name="signSchool" id="signSchool" required>
-        <br>
-        <br>
-    </div>
-
-    <div align="left" style="margin-top: 5px;margin-left: 20px">
-        <button style="color:white;background-color:#999999;font-size:10;
-                   width:120px;height:50px;outline:none;border-radius:10px;border:none;" type="button"
-            onclick="newSignUp()">登　録</button>
-    </div>
-
-    <div align="left" style="margin-top: 5px;margin-left: 20px">
-        <button style="color:black;background-color:white;font-size:10;
-                   width:60px;height:40px;outline:none;border-radius:10px;" type="button"
-            onclick="window.top.location.href = '<?!=url?>?page=index1';">戻る</button>
-    </div>
+<div align="left" style="margin-top: 5px;margin-left: 20px">
+    <button style="color:black;background-color:white;font-size:10;
+                   width:60px;height:40px;outline:none;border-radius:10px;"
+            type="button" onclick="window.top.location.href = '<?!=url?>?page=index1';">戻る</button>
+</div>
 
     <script>
-        function newSignUp() {
-            const signID = document.getElementById("signID").value;
-            const signPASS = document.getElementById("signPASS").value;
-            const signName = document.getElementById("signName").value;
-            const signAddress = document.getElementById("signAddress").value;
-            const signPhoneNumber = document.getElementById("signPhoneNumber").value;
-            const signSchool = document.getElementById("signSchool").value;
-
-
-            google.script.run
-                .withFailureHandler(onFailure)
-                .withSuccessHandler(onSuccess)
-                .inputSheet(signID, signPASS, signName, signAddress, signPhoneNumber, signSchool);
-        }
-
-
-        function onSuccess(result) {
-            alert(result);
-            const signIDN = document.getElementById("signID").value;
-            window.top.location.href = '<?!=url?>' + '?id=' + signIDN + '&enumber=99&page=index2';
-        }
-
-
-        function onFailure(e) {
-            alert([e.message, e.stack]);
-        }  
+     function newSignUp(){
+      const signID     = document.getElementById("signID").value;
+      const signPASS   = document.getElementById("signPASS").value;
+      const signName        = document.getElementById("signName").value;
+      const signAddress     = document.getElementById("signAddress").value;
+      const signPhoneNumber = document.getElementById("signPhoneNumber").value;
+      const signSchool      = document.getElementById("signSchool").value;
+  
+  
+      google.script.run
+      .withFailureHandler(onFailure)
+      .withSuccessHandler(onSuccess)
+      .inputSheet(signID, signPASS, signName, signAddress, signPhoneNumber, signSchool);
+     }
+     
+     
+     function onSuccess(result) {
+      alert(result);
+      const signIDN = document.getElementById("signID").value;
+      window.top.location.href = '<?!=url?>' + '?id=' + signIDN + '&enumber=99&page=index2';
+    }
+    
+    
+    function onFailure(e) {
+      alert([e.message, e.stack]);
+    }  
     </script>
-
+    
 </body>
-
 </html>
 
